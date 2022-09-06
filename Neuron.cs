@@ -7,6 +7,7 @@ namespace blackGnom
     {
         public List<double> Weight { get; }
         public NeuronType NeuronType { get; }
+        public List<double> Weights { get; private set; }
         public double Output { get; private set; }
 
 
@@ -25,7 +26,7 @@ namespace blackGnom
         public double FeedForward(List<double> inputs)                        //дополнить систему проверок входных корректных данных
             {
             var sum = 0.0;
-                for (int i = 0;i < inputs.Count;i++)
+                for(int i = 0; i < inputs.Count; i++)
                 {
                      sum += inputs[i] * Weights[i];
                 }
@@ -49,7 +50,7 @@ namespace blackGnom
             }
             
 
-        public void SetWights(params double[] weights)
+        public void SetWeights(params double[] weights)                       // НАВЕРНО НЕПРАВИЛЬНО
         {
             //Скорее всего нужно будет удалить после добавления возможности обучения сети (в реальной 
             for(int i = 0; i < weights.Length; i++)

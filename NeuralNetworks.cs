@@ -13,7 +13,7 @@ namespace blackGnom
 
         public NeuralNetworks(Drevo drevo)
         {
-            Drevo = drevo;
+            Drevo = drevo??throw new ArgumentNullException(nameof(drevo));
 
             Layers = new List<Layer>();
 
@@ -28,7 +28,7 @@ namespace blackGnom
             FeedForwardAllLayersAfterInput();
 
 
-            if(Drevo.OutputCount == 1)
+            if (Drevo.OutputCount == 1)
             {
                 return Layers.Last().Neurons[0];                    
             }
@@ -94,7 +94,7 @@ namespace blackGnom
         private void CreateInputLayer()
         {
             var inputNeurons = new List<Neuron>();
-            for(int i = 0; i < Drevo.InputCount; i ++)
+            for(int i = 0; i < Drevo.InputCount; i++)
             {
                 var neuron = new Neuron(1, NeuronType.Input);
                 inputNeurons.Add(neuron);                                                        // нейронка в  три основных слоя
