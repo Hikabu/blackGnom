@@ -1,6 +1,4 @@
-﻿
-
-namespace blackGnom
+﻿namespace blackGnom
 {
     internal class Drevo
     {

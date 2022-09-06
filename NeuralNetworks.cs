@@ -1,48 +1,86 @@
-﻿namespace blackGnom
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace blackGnom
 {
     public class NeuralNetworks
     {
         public Drevo Drevo { get; }
-        public List<Layer> layers { get; }
+        public List<Layer> Layers { get; }
 
         public NeuralNetworks(Drevo drevo)
         {
             Drevo = drevo;
 
-            layers = new List<Layer>();
+            Layers = new List<Layer>();
 
             CreateInputLayer();
             CreateHiddenLayers();
             CreateOutputLayer();
         }
 
-        public double FeedForward(List<double> inputSignals)
+        public Neuron FeedForward(List<double> inputSignals)
+        {
+            SendSignalsToInputNeurons(inputSignals);
+            FeedForwardAllLayersAfterInput();
+
+
+            if(Drevo.OutputCount == 1)
+            {
+                return Layers.Last().Neurons[0];                    
+            }
+            else
+            {
+                return Layers.Last().Neurons.OrderByDescending(n => n.Output).First();
+            }
+
+        }
+
+        private void FeedForwardAllLayersAfterInput()
+        {
+            for (int i = 1; i < Layers.Count; i++)
+            {
+                var layer = Layers[i];
+                var previousLayerSignals = Layers[i - 1].GetSignals();
+
+                foreach (var neuron in layer.Neurons)
+                {
+                    neuron.FeedForward(previousLayerSignals);
+                }
+            }
+        }
+
+        private void SendSignalsToInputNeurons(List<double> inputSignals)
         {
             for (int i = 0; i < inputSignals.Count; i++)
             {
-                var signal = new List<double> inputSignals)           //21- 27 строчки можно закрепить в новый метод 
-                var neuron = layers[0].Neurons[i];
+                var signal = new List<double>() { inputSignals[i] };
+                var neuron = Layers[0].Neurons[i];
 
-                neuron.FeedForward()
-            } 
+                neuron.FeedForward(signal);
+            }
+        }
 
         private void CreateOutputLayer()
         {
-            var OutputNeurons = new List<Neuron>();
+            var outputNeurons = new List<Neuron>();
             var lastLayer = Layers.Last();
             for (int i = 0; i < Drevo.OutputCount; i++)
             {
                 var neuron = new Neuron(lastLayer.Count, NeuronType.Output);
-                OutputNeurons.Add(neuron);
+                outputNeurons.Add(neuron);
             }
-            var OutputLayer = new Layer(OutputNeurons, NeuronType.Output);
-            Layers.Add(OutputLayer);
+            var outputLayer = new Layer(outputNeurons, NeuronType.Output);
+            Layers.Add(outputLayer);
         }
-        private void CreateHiddenLayer()
+        private void CreateHiddenLayers()
         {
-            for (int j = 0; int < Drevo.HiddenLayers.Count; j++)
+            for (int j = 0; j < Drevo.HiddenLayers.Count; j++)
             {
-                var hiddentNeurons = new List<Neuron>();
+                var hiddenNeurons = new List<Neuron>();
                 var lastLayer = Layers.Last();
                 for (int i = 0; i < Drevo.HiddenLayers[j]; i++)
                 {
@@ -59,7 +97,7 @@
             for(int i = 0; i < Drevo.InputCount; i ++)
             {
                 var neuron = new Neuron(1, NeuronType.Input);
-                inputNeurons.Add(neuron);                                                         // нейронка в  три основных слоя
+                inputNeurons.Add(neuron);                                                        // нейронка в  три основных слоя
             }
             var inputLayer = new Layer(inputNeurons, NeuronType.Input);
             Layers.Add(inputLayer); 

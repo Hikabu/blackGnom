@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackGnom", "blackGnom.csproj", "{D7760F01-0DF0-482A-9F30-379DBF165815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blackGnom", "blackGnom.csproj", "{D7760F01-0DF0-482A-9F30-379DBF165815}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blackGnomTests", "..\blackGnomTests\blackGnomTests.csproj", "{0C81772F-4F25-4D19-966E-64D68BF5E4D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D7760F01-0DF0-482A-9F30-379DBF165815}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7760F01-0DF0-482A-9F30-379DBF165815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7760F01-0DF0-482A-9F30-379DBF165815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C81772F-4F25-4D19-966E-64D68BF5E4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C81772F-4F25-4D19-966E-64D68BF5E4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C81772F-4F25-4D19-966E-64D68BF5E4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C81772F-4F25-4D19-966E-64D68BF5E4D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
