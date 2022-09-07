@@ -13,7 +13,7 @@ namespace blackGnom
 
         public NeuralNetworks(Drevo drevo)
         {
-            Drevo = drevo??throw new ArgumentNullException(nameof(drevo));
+            Drevo = drevo;
 
             Layers = new List<Layer>();
 

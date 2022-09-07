@@ -1,6 +1,8 @@
-﻿namespace blackGnom
+﻿using System.Collections.Generic;
+
+namespace blackGnom
 {
-    internal class Drevo
+    public class Drevo
     {
         public int InputCount { get; }
         public int OutputCount { get; }

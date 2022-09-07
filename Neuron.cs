@@ -5,11 +5,9 @@ namespace blackGnom
 {
     public class Neuron
     {
-        public List<double> Weight { get; }
+        public List<double> Weights { get; }                //
         public NeuronType NeuronType { get; }
-        public List<double> Weights { get; private set; }
-        public double Output { get; private set; }
-
+        public double Output { get; private set; }            //
 
         public Neuron(int inputCount, NeuronType type = NeuronType.Normal)
         {
@@ -20,42 +18,32 @@ namespace blackGnom
             {
                 Weights.Add(1);
             }
-        
         }
 
         public double FeedForward(List<double> inputs)                        //дополнить систему проверок входных корректных данных
-            {
+        {
             var sum = 0.0;
-                for(int i = 0; i < inputs.Count; i++)
-                {
-                     sum += inputs[i] * Weights[i];
-                }
-
-             if(NeuronType != NeuronType.Input)
-             {
-            Output = Sigmoid(sum);
-             }
-             else
-             {
-                Output = sum; 
-             }
-             
-            return Output;
-            }
-            
-            private double Sigmoid(double x)
+            for (int i = 0; i < inputs.Count; i++)
             {
-                 var result = 1.0 / (1.0 + Math.Pow(Math.E, -x)); 
-                 return result;  
+                sum += inputs[i] * Weights[i];
             }
-            
 
+            Output = Sigmoid(sum);
+            return Output;
+        }
+
+        private double Sigmoid(double x)
+        {
+            var result = 1.0 / (1.0 + Math.Pow(Math.E, -x));
+            return result;
+        }
+            
         public void SetWeights(params double[] weights)                       // НАВЕРНО НЕПРАВИЛЬНО
         {
             //Скорее всего нужно будет удалить после добавления возможности обучения сети (в реальной 
             for(int i = 0; i < weights.Length; i++)
             {
-                weights[i] = weights[i];
+                Weights[i] = weights[i];
             }
         }
             public override string ToString()
